@@ -31,8 +31,9 @@ class SegmentationDataSet1(data.Dataset):
             x, y = self.transform(x, y)
 
         # Typecasting
-        x, y = torch.from_numpy(x).type(self.inputs_dtype), torch.from_numpy(y).type(
-            self.targets_dtype
+        x, y = (
+            torch.from_numpy(x).type(self.inputs_dtype),
+            torch.from_numpy(y).type(self.targets_dtype),
         )
 
         return x, y
@@ -61,7 +62,9 @@ class SegmentationDataSet2(data.Dataset):
             self.cached_data = []
 
             progressbar = tqdm(range(len(self.inputs)), desc="Caching")
-            for i, img_name, tar_name in zip(progressbar, self.inputs, self.targets):
+            for i, img_name, tar_name in zip(
+                progressbar, self.inputs, self.targets
+            ):
                 img, tar = imread(str(img_name)), imread(str(tar_name))
                 if self.pre_transform is not None:
                     img, tar = self.pre_transform(img, tar)
@@ -87,8 +90,9 @@ class SegmentationDataSet2(data.Dataset):
             x, y = self.transform(x, y)
 
         # Typecasting
-        x, y = torch.from_numpy(x).type(self.inputs_dtype), torch.from_numpy(y).type(
-            self.targets_dtype
+        x, y = (
+            torch.from_numpy(x).type(self.inputs_dtype),
+            torch.from_numpy(y).type(self.targets_dtype),
         )
 
         return x, y
@@ -119,7 +123,8 @@ class SegmentationDataSet3(data.Dataset):
 
             with Pool() as pool:
                 self.cached_data = pool.starmap(
-                    self.read_images, zip(inputs, targets, repeat(self.pre_transform))
+                    self.read_images,
+                    zip(inputs, targets, repeat(self.pre_transform)),
                 )
 
     def __len__(self):
@@ -141,8 +146,9 @@ class SegmentationDataSet3(data.Dataset):
             x, y = self.transform(x, y)
 
         # Typecasting
-        x, y = torch.from_numpy(x).type(self.inputs_dtype), torch.from_numpy(y).type(
-            self.targets_dtype
+        x, y = (
+            torch.from_numpy(x).type(self.inputs_dtype),
+            torch.from_numpy(y).type(self.targets_dtype),
         )
 
         return x, y
@@ -180,7 +186,8 @@ class SegmentationDataSet4(data.Dataset):
 
             with Pool() as pool:
                 self.cached_data = pool.starmap(
-                    self.read_images, zip(inputs, targets, repeat(self.pre_transform))
+                    self.read_images,
+                    zip(inputs, targets, repeat(self.pre_transform)),
                 )
 
     def __len__(self):
@@ -202,8 +209,9 @@ class SegmentationDataSet4(data.Dataset):
             x, y = self.transform(x, y)
 
         # Typecasting
-        x, y = torch.from_numpy(x).type(self.inputs_dtype), torch.from_numpy(y).type(
-            self.targets_dtype
+        x, y = (
+            torch.from_numpy(x).type(self.inputs_dtype),
+            torch.from_numpy(y).type(self.targets_dtype),
         )
 
         return {
