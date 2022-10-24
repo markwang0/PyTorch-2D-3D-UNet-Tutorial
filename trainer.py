@@ -2,6 +2,7 @@ from typing import Optional
 
 import numpy as np
 import torch
+import torch.optim.lr_scheduler
 from torch.utils.data import Dataset
 
 
@@ -14,7 +15,7 @@ class Trainer:
         optimizer: torch.optim.Optimizer,
         training_dataloader: Dataset,
         validation_dataloader: Optional[Dataset] = None,
-        lr_scheduler: Optional[torch.optim.lr_scheduler] = None,
+        lr_scheduler: Optional = None,
         epochs: int = 100,
         epoch: int = 0,
         notebook: bool = False,
